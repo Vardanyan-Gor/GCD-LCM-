@@ -7,10 +7,10 @@ std::string caesarCipher(const std::string& text, int shift) {
     for (char c : text) {
         if (isalpha(c)) {
             char base = islower(c) ? 'a' : 'A';
-            // Сдвиг и обеспечение цикличности алфавита
+            
             c = (c - base + shift) % 26 + base;
         }
-        result += c; // Добавление символа к результату
+        result += c; 
     }
     return result;
 }
