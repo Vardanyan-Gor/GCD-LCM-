@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <unordered_map>
 #include <cctype>
@@ -40,9 +40,8 @@ std::string substitute(const std::string& text, const std::unordered_map<char, c
         if (isalpha(c)) {
             char upperChar = toupper(c);
             substitutedText += substitutionMap.at(upperChar);
-        }
-        else {
-            substitutedText += c; 
+        } else {
+            substitutedText += c; // Не заменяем неалфавитные символы
         }
     }
     return substitutedText;
@@ -52,7 +51,7 @@ int main() {
     setlocale(LC_ALL, "rus");
 
     auto substitutionMap = createSubstitutionMap();
-
+    
     std::string text;
     std::cout << "Введите текст для шифрования: ";
     std::getline(std::cin, text);
