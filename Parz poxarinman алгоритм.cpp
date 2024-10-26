@@ -41,7 +41,7 @@ std::string substitute(const std::string& text, const std::unordered_map<char, c
             char upperChar = toupper(c);
             substitutedText += substitutionMap.at(upperChar);
         } else {
-            substitutedText += c; // Не заменяем неалфавитные символы
+            substitutedText += c; 
         }
     }
     return substitutedText;
