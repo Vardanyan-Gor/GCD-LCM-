@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <cstring>
-#include "MatrixCripto.h"
+#include "matrixencripting.h"
 #include "Huffman.h"
 
 using namespace std;
