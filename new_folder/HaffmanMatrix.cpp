@@ -1,36 +1,36 @@
-#ifndef HUFFMAN_CODING_H
-#define HUFFMAN_CODING_H
-
+#include <iostream>
 #include <string>
-#include <unordered_map>
-#include <vector>
+#include "matrixencripting.h"
+#include "Haffman.h"
 
 using namespace std;
 
-// Узел дерева Хаффмана
-struct HuffmanNode {
-    char ch;
-    int freq;
-    HuffmanNode *left, *right;
+int main() {
+    string testData = "hello world";
+    cout << "Original Text: " << testData << endl;
 
-    HuffmanNode(char character, int frequency);
-};
+    // Шифрование с помощью матричного шифрования
+    string matEncrypted = MatrixCripto::encrypt(testData, 3);
+    cout << "Matrix Encrypted: " << matEncrypted << endl;
 
-// Компаратор для приоритетной очереди
-struct Compare {
-    bool operator()(HuffmanNode *a, HuffmanNode *b);
-};
+    // Кодирование с помощью Хаффмана
+    unordered_map<char, int> freqMap;
+    for (char ch : matEncrypted) {
+        freqMap[ch]++;
+    }
+    HuffmanNode* root = buildHuffmanTree(freqMap);
+    unordered_map<char, string> huffmanCodes;
+    buildHuffmanCodes(root, "", huffmanCodes);
+    string huffmanEncoded = encode(matEncrypted, huffmanCodes);
+    cout << "Huffman Encrypted: " << huffmanEncoded << endl;
 
-// Построение дерева Хаффмана
-HuffmanNode* buildHuffmanTree(const unordered_map<char, int> &freqMap);
+    // Декодирование с помощью Хаффмана
+    string huffmanDecoded = decode(root, huffmanEncoded);
+    cout << "Huffman Decrypted: " << huffmanDecoded << endl;
 
-// Построение таблицы кодов
-void buildHuffmanCodes(HuffmanNode *node, const string &code, unordered_map<char, string> &huffmanCodes);
+    // Дешифрование с помощью матричного шифрования
+    string matDecrypted = MatrixCripto::decrypt(huffmanDecoded, 3);
+    cout << "Matrix Decrypted: " << matDecrypted << endl;
 
-// Кодирование строки
-string encode(const string &text, const unordered_map<char, string> &huffmanCodes);
-
-// Декодирование строки
-string decode(HuffmanNode *root, const string &encoded);
-
-#endif // HUFFMAN_CODING_H
+    return 0;
+}
